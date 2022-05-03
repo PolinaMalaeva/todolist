@@ -49,7 +49,7 @@ class App extends React.Component<any, any> {
         return (
             <BrowserRouter>
                 <div className='wrap'>
-                    <Navigation/>
+                    <Navigation />
                     <div className='main'>
                         <Routes>
                             <Route path="/" element={<PageMain/>}/>

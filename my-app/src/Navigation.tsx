@@ -41,7 +41,8 @@ class Navigation extends React.Component< {}, { styleNav: string, isHidden:strin
 
                 <Link to="/" className='elem elem_main' style={{
                     width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px'
+                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    background: (window.location.pathname == "/") ? 'blue' : ''
                 }}>
                     <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="96px"
                          height="96px">
