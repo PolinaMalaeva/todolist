@@ -1,0 +1,79 @@
+.statistics_list {
+  .item {
+    padding: 50px;
+    background: #4a5262;
+    max-width: 350px;
+    border-radius: 25px;
+    font-size: 28px;
+    display: inline-block;
+  }
+
+  & > div:not(:last-child) {
+    margin: 0 0 40px 0;
+  }
+
+  .value {
+    display: inline-block;
+    font-size: 110px;
+  }
+
+  img {
+    width: 300px;
+  }
+
+  .number_added img {
+    vertical-align: sub;
+  }
+
+  .number_deleted {
+    .value, img {
+      vertical-align: top;
+    }
+
+    img {
+      width: 350px;
+    }
+  }
+
+  .number_edited {
+    margin-top: -28px !important;
+
+
+    img {
+      width: 350px;
+      vertical-align: bottom;
+      transform: rotate(-10deg);
+    }
+
+    .value {
+      vertical-align: top;
+    }
+  }
+
+  .time_adding_first {
+    .value {
+      vertical-align: bottom;
+    }
+
+    img {
+      vertical-align: top;
+    }
+  }
+
+  .time_adding_last img {
+    vertical-align: top;
+    transform: rotate(182deg);
+  }
+
+  .time_adding_first, .time_adding_last {
+    .value {
+      max-width: 115px;
+      margin-left: 5px;
+      font-family: system-ui;
+      font-size: 27px;
+      line-height: 23px;
+      font-weight: 600;
+      vertical-align: bottom;
+    }
+  }
+}

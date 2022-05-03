@@ -1,0 +1,152 @@
+.inputs {
+  display: flex;
+  width: max-content;
+
+  & > div:first-child {
+    margin: 0 35px 0 0;
+
+    input, textarea {
+      font-family: Alef;
+      font-size: 20px;
+      min-width: 520px;
+      padding: 25px 20px;
+      border-radius: 10px;
+      border: 1px solid #28457a;
+      cursor: pointer;
+      transition: 300ms;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.88);
+      }
+    }
+  }
+
+  .input_title {
+    display: block;
+    margin: 0 0 20px 0;
+  }
+
+  .input_description {
+    min-height: 200px;
+  }
+
+  .btn {
+    width: 100px;
+    height: 98%;
+    background: url("../img/add.png") 50%/50% no-repeat, #5b5757b0;
+    padding: 15px 20px;
+    border: 1px solid #28457a;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+      background-color: rgba(91, 87, 87, 0.88);
+    }
+  }
+}
+
+.task {
+  position: relative;
+  background: #6884be;
+  max-width: 655px;
+  border-radius: 10px;
+  margin: 40px 0 -20px 0;
+  padding: 20px 100px 20px 50px;
+}
+
+.task_title,
+.task_description {
+  position: relative;
+}
+
+.task_title {
+  font-weight: bold;
+  min-height: 41px;
+  font-size: 28px;
+  border-bottom: 3px solid black;
+  width: 100%;
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+}
+
+.task_description {
+  min-height: 28px;
+}
+
+.error_input {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  padding: 20px;
+  border-radius: 20px 80px;
+  opacity: 0;
+  background: #d33636;
+  transition: 800ms;
+  cursor: default;
+}
+
+.control {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-20%, -50%);
+  display: flex;
+
+  & > div {
+
+    & svg {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: 300ms;
+    }
+  }
+
+  .edit svg:hover {
+    fill: green;
+  }
+
+  .delete svg:hover {
+    fill: red;
+  }
+}
+
+.task_edit {
+  font-family: Alef;
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 38px;
+  margin-top: -5px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0 0 5px #000000;
+  background: #a1b1dc;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background: #1c2b4b;
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 15px;
+  }
+}
+
+.edit_title {
+  bottom: 5px;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.edit_description {
+  margin-top: -2.5px;
+  font-size: 24px;
+}
