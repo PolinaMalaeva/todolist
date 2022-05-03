@@ -1,14 +1,16 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 
-class Navigation extends React.Component< {}, { styleNav: string, isHidden:string }> {
+class Navigation extends React.Component<{}, { styleNav: string, isHidden: string, path: string }> {
     hidden: React.RefObject<any>;
+
     constructor(props: any) {
         super(props);
         this.hidden = React.createRef<any>();
         this.state = {
             styleNav: '',
-            isHidden: ''
+            isHidden: '',
+            path: window.location.pathname
         }
     }
 
@@ -26,6 +28,16 @@ class Navigation extends React.Component< {}, { styleNav: string, isHidden:strin
         this.setState({styleNav: this.hidden.current.style})
     }
 
+    handlePath() {
+        this.setState({path: window.location.pathname})
+    }
+
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{ styleNav: string; isHidden: string; path: string }>, snapshot?: any) {
+        if (prevState.path != window.location.pathname) {
+            this.setState({path: window.location.pathname})
+        }
+    }
+
     render() {
 
         return (
@@ -36,13 +48,13 @@ class Navigation extends React.Component< {}, { styleNav: string, isHidden:strin
                             fontSize: (this.state.isHidden) ? 12 + 'px' : ''
                         }}>
                     {
-                         (this.state.isHidden) ? 'Раскрыть' : 'Скрыть'}
+                        (this.state.isHidden) ? 'Раскрыть' : 'Скрыть'}
                 </button>
 
-                <Link to="/" className='elem elem_main' style={{
+                <Link to="/" className='elem elem_main' onClick={() => this.handlePath()} style={{
                     width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
                     height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
-                    background: (window.location.pathname == "/") ? 'blue' : ''
+                    background: (this.state.path == "/") ? '#3232ca' : ''
                 }}>
                     <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="96px"
                          height="96px">
@@ -51,53 +63,57 @@ class Navigation extends React.Component< {}, { styleNav: string, isHidden:strin
                     </svg>
                     <p className='elem_description'
                        style={{
-                            display: (this.state.isHidden) ? 'none' : 'block'}}>Главная
+                           display: (this.state.isHidden) ? 'none' : 'block'
+                       }}>Главная
                         страница</p>
                 </Link>
 
-                <Link to="/PageTodoList" className='elem elem_todoList' style={{
-                        width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                        height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px'
-                    }}>
-                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                             width="96.000000pt" height="96.000000pt" viewBox="0 0 96.000000 96.000000"
-                             preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
-                               fill="#000000" stroke="none">
-                                <path d="M150 720 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
-                                <path d="M390 720 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
-                                <path d="M150 480 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
-                                <path d="M390 480 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
-                                <path d="M150 240 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
-                                <path d="M390 240 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
-                            </g>
-                        </svg>
-                        <p className='elem_description'
-                           style={{
-                               display: (this.state.isHidden) ? 'none' : 'block'}}>Составить
-                            список задач</p>
+                <Link to="/PageTodoList" className='elem elem_todoList' onClick={() => this.handlePath()} style={{
+                    width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
+                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    background: (this.state.path == "/PageTodoList") ? '#3232ca' : ''
+                }}>
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                         width="96.000000pt" height="96.000000pt" viewBox="0 0 96.000000 96.000000"
+                         preserveAspectRatio="xMidYMid meet">
+                        <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
+                           fill="#000000" stroke="none">
+                            <path d="M150 720 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
+                            <path d="M390 720 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
+                            <path d="M150 480 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
+                            <path d="M390 480 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
+                            <path d="M150 240 l0 -90 90 0 90 0 0 90 0 90 -90 0 -90 0 0 -90z"/>
+                            <path d="M390 240 l0 -30 210 0 210 0 0 30 0 30 -210 0 -210 0 0 -30z"/>
+                        </g>
+                    </svg>
+                    <p className='elem_description'
+                       style={{
+                           display: (this.state.isHidden) ? 'none' : 'block'
+                       }}>Составить список задач</p>
                 </Link>
 
-                <Link to="/PageStatistics" className='elem elem_statistics' style={{
-                        width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                        height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px'
-                    }}>
-                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                             width="50.000000pt" height="50.000000pt" viewBox="0 0 50.000000 50.000000"
-                             preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
-                               fill="#000000" stroke="none">
-                                <path d="M410 175 l0 -175 40 0 40 0 0 175 0 175 -40 0 -40 0 0 -175z"/>
-                                <path d="M210 130 l0 -130 40 0 40 0 0 130 0 130 -40 0 -40 0 0 -130z"/>
-                                <path d="M310 105 l0 -105 40 0 40 0 0 105 0 105 -40 0 -40 0 0 -105z"/>
-                                <path d="M110 105 l0 -105 40 0 40 0 0 90 0 105 -40 0 -40 0 0 -105z"/>
-                                <path d="M10 105 l0 -105 40 0 40 0 0 10 0 105 -40 0 -40 0 0 -105z"/>
-                            </g>
-                        </svg>
-                        <p className='elem_description'
-                           style={{
-                               display: (this.state.isHidden) ? 'none' : 'block'}}>Статистика
-                            по задачам</p>
+                <Link to="/PageStatistics" className='elem elem_statistics' onClick={() => this.handlePath()} style={{
+                    width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
+                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    background: (this.state.path == "/PageStatistics") ? '#3232ca' : ''
+                }}>
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                         width="50.000000pt" height="50.000000pt" viewBox="0 0 50.000000 50.000000"
+                         preserveAspectRatio="xMidYMid meet">
+                        <g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
+                           fill="#000000" stroke="none">
+                            <path d="M410 175 l0 -175 40 0 40 0 0 175 0 175 -40 0 -40 0 0 -175z"/>
+                            <path d="M210 130 l0 -130 40 0 40 0 0 130 0 130 -40 0 -40 0 0 -130z"/>
+                            <path d="M310 105 l0 -105 40 0 40 0 0 105 0 105 -40 0 -40 0 0 -105z"/>
+                            <path d="M110 105 l0 -105 40 0 40 0 0 90 0 105 -40 0 -40 0 0 -105z"/>
+                            <path d="M10 105 l0 -105 40 0 40 0 0 10 0 105 -40 0 -40 0 0 -105z"/>
+                        </g>
+                    </svg>
+                    <p className='elem_description'
+                       style={{
+                           display: (this.state.isHidden) ? 'none' : 'block'
+                       }}>Статистика
+                        по задачам</p>
                 </Link>
             </div>
         )
