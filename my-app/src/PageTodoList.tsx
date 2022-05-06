@@ -32,7 +32,7 @@ class PageTodoList extends React.Component<{
         this.state = {
             title: '',
             description: '',
-            list: [],
+            list: JSON.parse(localStorage.getItem('list')!) || [],
         }
 
         this.borderError = '2px solid red'
@@ -82,9 +82,9 @@ class PageTodoList extends React.Component<{
             })
             this.setState({title: ''})
             this.setState({description: ''})
-        } else if ((!this.state.title || /\s/.test(this.state.title)) && this.state.description) {
+        } else if ((!this.state.title || /\s/.test(this.state.title)) && /\S/.test(this.state.description)) {
             this.inputTitle.current!.style.border = this.borderError
-        } else if ((!this.state.description || /\s/.test(this.state.description)) && this.state.title) {
+        } else if ((!this.state.description || /\s/.test(this.state.description)) && /\S/.test(this.state.title)) {
             this.inputDescription.current!.style.border = this.borderError
         } else {
             this.inputTitle.current!.style.border = this.borderError
@@ -98,11 +98,13 @@ class PageTodoList extends React.Component<{
         this.props.handleNumberDeleteTasks();
         let indexDeleteTask = this.state.list.findIndex(task => task.id == id);
         this.state.list.splice(indexDeleteTask, 1);
-        this.setState({list: this.state.list})
+        this.setState({list: this.state.list});
+        localStorage.setItem('list', JSON.stringify(this.state.list));
     }
 
     updateState() {
-        this.setState({list: this.state.list})
+        this.setState({list: this.state.list});
+        localStorage.setItem('list', JSON.stringify(this.state.list));
     }
 
     componentDidUpdate(prevProps: Readonly<{ numberTasks: number; numberDeleteTasks: number; numberEditTasks: number; timeFirstTask: string; timeLastTask: string; handleNumberTasks: any; handleNumberDeleteTasks: any; handleNumberEditTasks: any; handleTimeFirstTask: any; handleTimeLastTask: any }>, prevState: Readonly<{ title: string; description: string; list: IList[] }>, snapshot?: any) {
@@ -111,6 +113,7 @@ class PageTodoList extends React.Component<{
             this.props.handleTimeFirstTask();
         }
         if((prevState.list != this.state.list) && this.state.list[this.state.list.length - 1]) {
+            localStorage.setItem('list', JSON.stringify(this.state.list));
             localStorage.setItem('timeLastTask', this.state.list[this.state.list.length - 1].time);
             this.props.handleTimeLastTask();
         }

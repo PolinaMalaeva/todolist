@@ -2,67 +2,78 @@
   .item {
     padding: 50px;
     background: #4a5262;
+    min-width: 350px;
     max-width: 350px;
+    max-height: 185px;
     border-radius: 25px;
     font-size: 28px;
-    display: inline-block;
   }
 
-  & > div:not(:last-child) {
-    margin: 0 0 40px 0;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      margin: 0 0 40px 0;
+    }
   }
 
   .value {
-    display: inline-block;
     font-size: 110px;
   }
 
   img {
-    width: 300px;
+    max-width: 350px;
   }
 
-  .number_added img {
-    vertical-align: sub;
+  .number_added {
+    img {
+      max-width: 430px;
+    }
+
+    .value {
+      align-self: center;
+    }
   }
 
   .number_deleted {
-    .value, img {
-      vertical-align: top;
+    img {
+      max-width: 385px;
     }
 
-    img {
-      width: 350px;
+    .value {
+      margin-top: 35px;
     }
   }
 
   .number_edited {
-    margin-top: -28px !important;
-
-
     img {
-      width: 350px;
-      vertical-align: bottom;
+      max-width: 400px;
+      margin-top: -25px;
       transform: rotate(-10deg);
     }
 
     .value {
-      vertical-align: top;
+      margin-top: -30px;
     }
   }
 
   .time_adding_first {
-    .value {
-      vertical-align: bottom;
-    }
+    margin-top: -30px !important;
 
-    img {
-      vertical-align: top;
+    .value {
+      align-self: end;
     }
   }
 
-  .time_adding_last img {
-    vertical-align: top;
-    transform: rotate(182deg);
+  .time_adding_last {
+    img {
+      transform: rotate(182deg);
+    }
+
+    .value {
+      align-self: center;
+    }
   }
 
   .time_adding_first, .time_adding_last {
@@ -73,7 +84,6 @@
       font-size: 27px;
       line-height: 23px;
       font-weight: 600;
-      vertical-align: bottom;
     }
   }
 }

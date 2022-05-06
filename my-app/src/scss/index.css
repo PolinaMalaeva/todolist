@@ -139,50 +139,56 @@
 .statistics_list .item {
   padding: 50px;
   background: #4a5262;
+  min-width: 350px;
   max-width: 350px;
+  max-height: 185px;
   border-radius: 25px;
   font-size: 28px;
-  display: inline-block;
+}
+.statistics_list > div {
+  display: flex;
+  justify-content: space-between;
 }
 .statistics_list > div:not(:last-child) {
   margin: 0 0 40px 0;
 }
 .statistics_list .value {
-  display: inline-block;
   font-size: 110px;
 }
 .statistics_list img {
-  width: 300px;
+  max-width: 350px;
 }
 .statistics_list .number_added img {
-  vertical-align: sub;
+  max-width: 430px;
 }
-.statistics_list .number_deleted .value, .statistics_list .number_deleted img {
-  vertical-align: top;
+.statistics_list .number_added .value {
+  align-self: center;
 }
 .statistics_list .number_deleted img {
-  width: 350px;
+  max-width: 385px;
 }
-.statistics_list .number_edited {
-  margin-top: -28px !important;
+.statistics_list .number_deleted .value {
+  margin-top: 35px;
 }
 .statistics_list .number_edited img {
-  width: 350px;
-  vertical-align: bottom;
+  max-width: 400px;
+  margin-top: -25px;
   transform: rotate(-10deg);
 }
 .statistics_list .number_edited .value {
-  vertical-align: top;
+  margin-top: -30px;
+}
+.statistics_list .time_adding_first {
+  margin-top: -30px !important;
 }
 .statistics_list .time_adding_first .value {
-  vertical-align: bottom;
-}
-.statistics_list .time_adding_first img {
-  vertical-align: top;
+  align-self: end;
 }
 .statistics_list .time_adding_last img {
-  vertical-align: top;
   transform: rotate(182deg);
+}
+.statistics_list .time_adding_last .value {
+  align-self: center;
 }
 .statistics_list .time_adding_first .value, .statistics_list .time_adding_last .value {
   max-width: 115px;
@@ -191,7 +197,6 @@
   font-size: 27px;
   line-height: 23px;
   font-weight: 600;
-  vertical-align: bottom;
 }
 
 * {

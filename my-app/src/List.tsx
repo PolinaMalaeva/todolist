@@ -15,7 +15,6 @@ class List extends React.Component<{
         super(props);
         this.taskEditTitle = React.createRef();
         this.taskEditDescription = React.createRef();
-
         this.repeat = [];
     }
 

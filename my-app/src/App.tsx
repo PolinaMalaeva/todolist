@@ -11,6 +11,7 @@ class App extends React.Component<any, any> {
         super(props);
 
         this.state = {
+            isHidden: '',
             numberTasks: +localStorage.getItem('numberTasks')! || 0,
             numberDeleteTasks: +localStorage.getItem('numberDeleteTasks')! || 0,
             numberEditTasks: +localStorage.getItem('numberEditTasks')! || 0,
@@ -18,11 +19,16 @@ class App extends React.Component<any, any> {
             timeLastTask: localStorage.getItem('timeLastTask')! || 'Задачи не добавлены'
         };
 
+        this.handleIsHidden = this.handleIsHidden.bind(this);
         this.handleNumberTasks = this.handleNumberTasks.bind(this);
         this.handleNumberDeleteTasks = this.handleNumberDeleteTasks.bind(this);
         this.handleNumberEditTasks = this.handleNumberEditTasks.bind(this);
         this.handleTimeFirstTask = this.handleTimeFirstTask.bind(this);
         this.handleTimeLastTask = this.handleTimeLastTask.bind(this);
+    }
+
+    handleIsHidden() {
+        this.setState({isHidden: (this.state.isHidden) ? '' : '+'});
     }
 
     handleNumberTasks() {
@@ -49,8 +55,9 @@ class App extends React.Component<any, any> {
         return (
             <BrowserRouter>
                 <div className='wrap'>
-                    <Navigation />
-                    <div className='main'>
+                    <Navigation isHidden={this.state.isHidden}
+                                handleIsHidden={this.handleIsHidden}/>
+                    <div className='main' style={{paddingLeft: (this.state.isHidden) ? '240px' : ''}}>
                         <Routes>
                             <Route path="/" element={<PageMain/>}/>
                             <Route path="/PageTodoList" element={<PageTodoList numberTasks={this.state.numberTasks}

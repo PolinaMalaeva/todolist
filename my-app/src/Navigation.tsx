@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 
-class Navigation extends React.Component<{}, { styleNav: string, isHidden: string, path: string }> {
+class Navigation extends React.Component<{isHidden:string, handleIsHidden:any}, { styleNav: string, path: string }> {
     hidden: React.RefObject<any>;
 
     constructor(props: any) {
@@ -9,19 +9,17 @@ class Navigation extends React.Component<{}, { styleNav: string, isHidden: strin
         this.hidden = React.createRef<any>();
         this.state = {
             styleNav: '',
-            isHidden: '',
             path: window.location.pathname
         }
     }
 
     clickHidden() {
-        this.setState((state) => ({isHidden: (state.isHidden) ? '' : '+'}));
-        if (this.state.isHidden) {
+        this.props.handleIsHidden();
+        if (this.props.isHidden) {
             this.hidden.current.style.cssText = '{this.state.styleNav}';
         } else {
             this.hidden.current.style.cssText = 'padding: 20px';
         }
-
     }
 
     componentDidMount() {
@@ -44,16 +42,16 @@ class Navigation extends React.Component<{}, { styleNav: string, isHidden: strin
             <div className='nav' ref={this.hidden}>
                 <button className='hidden' onClick={() => this.clickHidden()}
                         style={{
-                            maxWidth: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                            fontSize: (this.state.isHidden) ? 12 + 'px' : ''
+                            maxWidth: (this.props.isHidden) ? 80 + 'px' : 120 + 'px',
+                            fontSize: (this.props.isHidden) ? 12 + 'px' : ''
                         }}>
                     {
-                        (this.state.isHidden) ? 'Раскрыть' : 'Скрыть'}
+                        (this.props.isHidden) ? 'Раскрыть' : 'Скрыть'}
                 </button>
 
                 <Link to="/" className='elem elem_main' onClick={() => this.handlePath()} style={{
-                    width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    width: (this.props.isHidden) ? 80 + 'px' : 120 + 'px',
+                    height: (this.props.isHidden) ? 65 + 'px' : 120 + 'px',
                     background: (this.state.path == "/") ? '#3232ca' : ''
                 }}>
                     <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="96px"
@@ -63,14 +61,14 @@ class Navigation extends React.Component<{}, { styleNav: string, isHidden: strin
                     </svg>
                     <p className='elem_description'
                        style={{
-                           display: (this.state.isHidden) ? 'none' : 'block'
+                           display: (this.props.isHidden) ? 'none' : 'block'
                        }}>Главная
                         страница</p>
                 </Link>
 
                 <Link to="/PageTodoList" className='elem elem_todoList' onClick={() => this.handlePath()} style={{
-                    width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    width: (this.props.isHidden) ? 80 + 'px' : 120 + 'px',
+                    height: (this.props.isHidden) ? 65 + 'px' : 120 + 'px',
                     background: (this.state.path == "/PageTodoList") ? '#3232ca' : ''
                 }}>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -88,13 +86,13 @@ class Navigation extends React.Component<{}, { styleNav: string, isHidden: strin
                     </svg>
                     <p className='elem_description'
                        style={{
-                           display: (this.state.isHidden) ? 'none' : 'block'
+                           display: (this.props.isHidden) ? 'none' : 'block'
                        }}>Составить список задач</p>
                 </Link>
 
                 <Link to="/PageStatistics" className='elem elem_statistics' onClick={() => this.handlePath()} style={{
-                    width: (this.state.isHidden) ? 80 + 'px' : 120 + 'px',
-                    height: (this.state.isHidden) ? 65 + 'px' : 120 + 'px',
+                    width: (this.props.isHidden) ? 80 + 'px' : 120 + 'px',
+                    height: (this.props.isHidden) ? 65 + 'px' : 120 + 'px',
                     background: (this.state.path == "/PageStatistics") ? '#3232ca' : ''
                 }}>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +109,7 @@ class Navigation extends React.Component<{}, { styleNav: string, isHidden: strin
                     </svg>
                     <p className='elem_description'
                        style={{
-                           display: (this.state.isHidden) ? 'none' : 'block'
+                           display: (this.props.isHidden) ? 'none' : 'block'
                        }}>Статистика
                         по задачам</p>
                 </Link>
